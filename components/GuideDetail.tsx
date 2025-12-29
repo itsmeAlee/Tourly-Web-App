@@ -1,11 +1,23 @@
 'use client';
 import { Guide } from "@/types";
-import { Star, Languages, Phone, Mail } from "lucide-react";
+import { Star, Languages, Phone, Mail, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function GuideDetail({ guide }: { guide: Guide }) {
+  const router = useRouter();
+
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
+      {/* Back Button */}
+      <button
+        onClick={() => router.back()}
+        className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6 group"
+      >
+        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+        <span className="text-sm font-medium">Back</span>
+      </button>
+
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         {/* Image */}
         <div className="rounded-lg overflow-hidden border">

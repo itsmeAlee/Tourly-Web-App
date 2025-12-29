@@ -1,8 +1,9 @@
 'use client';
 import { Hotel } from "@/types";
-import { MapPin, Star, Wifi, Coffee, Wind, Tv, Calendar } from "lucide-react";
+import { MapPin, Star, Wifi, Coffee, Wind, Tv, Calendar, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const amenityIcons: Record<string, any> = {
   'WiFi': Wifi,
@@ -14,9 +15,19 @@ const amenityIcons: Record<string, any> = {
 export default function HotelDetail({ hotel }: { hotel: Hotel }) {
   const [currentImage, setCurrentImage] = useState(0);
   const images = hotel.images?.length ? hotel.images : ["https://placehold.co/800x400?text=No+Image"];
+  const router = useRouter();
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
+    <div className="max-w-4xl mx-auto pt-24 pb-16 px-4">
+      {/* Back Button */}
+      <button
+        onClick={() => router.back()}
+        className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6 group"
+      >
+        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+        <span className="text-sm font-medium">Back</span>
+      </button>
+
       {/* Image Carousel */}
       <div className="relative mb-8 rounded-lg overflow-hidden border">
         <img 

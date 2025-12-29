@@ -14,7 +14,7 @@ export default async function GuideDetailPage({ params }: { params: { id: string
     const guide = await getGuide(params.id);
     
     return (
-      <div className="min-h-screen bg-white pt-24 pb-16">
+      <div className="min-h-screen pt-24 pb-16">
         <GuideDetail guide={guide} />
       </div>
     );
