@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { Account, Client, Models, ID } from 'appwrite';
+import { Account, Client, Models, ID, OAuthProvider } from 'appwrite';
 
 type User = Models.User<Models.Preferences> | null;
 
@@ -62,7 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loginWithGoogle = () => {
     account.createOAuth2Session(
-      'google',
+      OAuthProvider.Google,
       `${window.location.origin}/`,
       `${window.location.origin}/login`
     );
