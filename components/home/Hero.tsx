@@ -33,7 +33,13 @@ export default function Hero() {
                     ></div>
                     
                     <div className="relative max-w-4xl mx-auto">
-                        <div className="bg-card p-4 rounded-lg border flex flex-col md:flex-row gap-3 items-end">
+                        <div 
+                            className="bg-card p-4 rounded-lg border flex flex-col md:flex-row gap-3 items-end"
+                            style={{
+                                borderColor: 'oklch(0.71 0.15 239.15)',
+                                boxShadow: '0 0 20px rgba(88, 86, 214, 0.3), 0 0 40px rgba(88, 86, 214, 0.15)'
+                            }}
+                        >
                     <div className="flex-1 w-full text-left">
                         <label className="block text-xs font-medium text-muted-foreground mb-2 ml-1">Destination</label>
                         <div className="relative">
