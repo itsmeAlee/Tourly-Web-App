@@ -3,6 +3,7 @@ import { Guide } from "@/types";
 import { Star, Languages, Phone, Mail, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function GuideDetail({ guide }: { guide: Guide }) {
   const router = useRouter();
@@ -21,10 +22,13 @@ export default function GuideDetail({ guide }: { guide: Guide }) {
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         {/* Image */}
         <div className="rounded-lg overflow-hidden border">
-          <img 
+          <Image 
             src={guide.imageUrl || 'https://placehold.co/600x600?text=Guide'} 
-            alt={guide.name} 
-            className="w-full h-full object-cover" 
+            alt={guide.name}
+            width={600}
+            height={600}
+            className="w-full h-full object-cover"
+            priority
           />
         </div>
 

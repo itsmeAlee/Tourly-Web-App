@@ -1,6 +1,7 @@
 'use client';
 import { Place } from '@/types';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MapPin, Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -10,9 +11,11 @@ export default function PlaceCard({ place }: { place: Place }) {
             <Card className="overflow-hidden rounded-lg transition-colors h-full group p-0">
                 <CardContent className="p-0">
                     <div className="relative h-56 overflow-hidden bg-muted">
-                        <img
+                        <Image
                             alt={place.name}
                             src={place.images?.[0] || "https://placehold.co/600x400?text=No+Image"}
+                            width={600}
+                            height={400}
                             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                         />
                         

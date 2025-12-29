@@ -4,6 +4,7 @@ import { MapPin, Star, Wifi, Coffee, Wind, Tv, Calendar, ArrowLeft } from "lucid
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const amenityIcons: Record<string, any> = {
   'WiFi': Wifi,
@@ -30,10 +31,13 @@ export default function HotelDetail({ hotel }: { hotel: Hotel }) {
 
       {/* Image Carousel */}
       <div className="relative mb-8 rounded-lg overflow-hidden border">
-        <img 
+        <Image 
           src={images[currentImage]} 
-          alt={hotel.name} 
-          className="w-full h-96 object-cover" 
+          alt={hotel.name}
+          width={800}
+          height={400}
+          className="w-full h-96 object-cover"
+          priority={currentImage === 0}
         />
         {images.length > 1 && (
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">

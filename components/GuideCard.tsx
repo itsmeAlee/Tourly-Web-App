@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Guide } from '@/types';
 import { Star, Languages } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -36,9 +37,11 @@ export default function GuideCard({ guide }: { guide: Guide }) {
             {/* Profile Image */}
             <div className="flex-shrink-0">
               <div className="w-20 h-20 rounded-full overflow-hidden bg-muted border-2 border-border">
-                <img 
+                <Image 
                   src={imageUrl || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(guide.name) + '&size=120&background=2D5F5D&color=fff'} 
                   alt={guide.name}
+                  width={120}
+                  height={120}
                   className="w-full h-full object-cover"
                 />
               </div>
