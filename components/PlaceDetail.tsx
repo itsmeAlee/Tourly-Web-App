@@ -10,7 +10,7 @@ export default function PlaceDetail({ place }: { place: Place }) {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
       {/* Image Carousel */}
-      <div className="relative mb-8 rounded-2xl overflow-hidden shadow-2xl">
+      <div className="relative mb-8 rounded-2xl overflow-hidden" style={{boxShadow: 'var(--shadow-floating-lg)'}}>
         <img 
           src={images[currentImage]} 
           alt={place.name} 
@@ -35,35 +35,35 @@ export default function PlaceDetail({ place }: { place: Place }) {
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-black mb-3 bg-gradient-to-r from-teal-700 to-orange-500 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold mb-3 text-foreground">
           {place.name}
         </h1>
-        <div className="flex items-center gap-2 text-gray-600 text-lg">
-          <MapPin className="w-5 h-5" />
+        <div className="flex items-center gap-2 text-muted-foreground text-lg">
+          <MapPin className="w-5 h-5 text-primary" />
           <span>{place.location}</span>
         </div>
       </div>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8" />
+      <div className="h-px bg-border mb-8" />
 
       {/* About Section */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">About</h2>
-        <p className="text-gray-600 text-lg leading-relaxed">{place.description}</p>
+        <h2 className="text-2xl font-bold mb-4 text-foreground">About</h2>
+        <p className="text-muted-foreground text-lg leading-relaxed">{place.description}</p>
       </div>
 
       {/* Activities Section */}
       {place.activities?.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-gray-800 flex items-center gap-2">
-            <Activity className="w-6 h-6 text-teal-600" />
+          <h2 className="text-2xl font-bold mb-4 text-foreground flex items-center gap-2">
+            <Activity className="w-6 h-6 text-primary" />
             Activities
           </h2>
           <div className="flex gap-2 flex-wrap">
             {place.activities.map(activity => (
               <span 
                 key={activity} 
-                className="px-4 py-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-shadow"
+                className="px-4 py-2 rounded-full bg-accent text-accent-foreground font-semibold text-sm"
               >
                 {activity}
               </span>

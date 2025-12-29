@@ -19,14 +19,14 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed top-0 w-full z-50 bg-white border-b border-gray-200"
-      style={{ height: '64px' }}
+      className="fixed top-0 w-full z-50 bg-card"
+      style={{ height: '64px', boxShadow: 'var(--shadow-floating-md)' }}
     >
       <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Compass className="w-6 h-6 text-[#2D5F5D]" />
-          <span className="text-xl font-semibold text-gray-900">
+          <Compass className="w-6 h-6 text-primary" />
+          <span className="text-xl font-semibold text-foreground">
             GB Tours
           </span>
         </Link>
@@ -40,8 +40,8 @@ export default function Navbar() {
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
                 isActive(item.href)
-                  ? "bg-gray-100 text-[#2D5F5D]"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  ? "bg-accent text-primary"
+                  : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
               )}
             >
               <item.icon className="w-4 h-4" />
@@ -56,7 +56,7 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="sm"
-              className="font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+              className="font-medium"
             >
               Login
             </Button>
@@ -64,7 +64,8 @@ export default function Navbar() {
           <Link href="/signup">
             <Button
               size="sm"
-              className="font-medium bg-[#2D5F5D] hover:bg-[#234745] text-white"
+              className="font-medium"
+              style={{ boxShadow: 'var(--shadow-tactile)' }}
             >
               Sign up
             </Button>

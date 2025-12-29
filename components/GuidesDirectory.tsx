@@ -34,16 +34,16 @@ export default function GuidesDirectory({ guides }: { guides: Guide[] }) {
   return (
     <>
       {/* Filter Bar */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 mb-8 shadow-sm">
+      <div className="bg-card rounded-xl p-4 mb-8" style={{boxShadow: 'var(--shadow-floating-md)'}}>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-muted-foreground">
             Showing {filteredGuides.length} of {guides.length} guides
           </div>
 
           {/* Language Filter */}
           <Select value={languageFilter} onValueChange={setLanguageFilter}>
-            <SelectTrigger className="w-[180px] h-11 border-gray-200">
-              <Languages className="w-4 h-4 mr-2 text-[#2D5F5D]" />
+            <SelectTrigger className="w-[180px] h-11">
+              <Languages className="w-4 h-4 mr-2 text-primary" />
               <SelectValue placeholder="Filter by Language" />
             </SelectTrigger>
             <SelectContent>
@@ -59,7 +59,7 @@ export default function GuidesDirectory({ guides }: { guides: Guide[] }) {
       {/* Guides Grid */}
       {filteredGuides.length === 0 ? (
         <div className="text-center py-16">
-          <p className="text-gray-500 text-lg">No guides found matching your criteria.</p>
+          <p className="text-muted-foreground text-lg">No guides found matching your criteria.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

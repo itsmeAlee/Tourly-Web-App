@@ -2,67 +2,142 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 183 100% 23%;
-    --primary-foreground: 183 100% 97%;
-    --secondary: 183 43% 65%;
-    --secondary-foreground: 183 100% 10%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 15 63% 69%;
-    --accent-foreground: 15 63% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 183 100% 23%;
-    --radius: 0.75rem;
-    
-    /* Custom travel theme colors */
-    --primary-teal: #006d77;
-    --primary-cyan: #83c5be;
-    --accent-coral: #e29578;
-    --accent-orange: #d68c60;
-    --bg-gradient: linear-gradient(135deg, #83c5be 0%, #006d77 100%);
-    --card-shadow: 0 8px 32px rgba(0, 109, 119, 0.08);
-    --card-hover-shadow: 0 16px 48px rgba(0, 109, 119, 0.16);
+    /* Base Colors (OKLCH) */
+    --background: oklch(0.98 0.01 225.66);
+    --foreground: oklch(0.15 0.02 269.18);
+    --card: oklch(0.99 0.005 228.79);
+    --card-foreground: oklch(0.15 0.02 269.18);
+
+    /* Brand Colors */
+    --primary: oklch(0.71 0.15 239.15);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.94 0.02 229.20);
+    --secondary-foreground: oklch(0.15 0.02 269.18);
+    --muted: oklch(0.92 0.02 225.69);
+    --muted-foreground: oklch(0.40 0.03 231.55);
+    --accent: oklch(0.92 0.02 235.72);
+    --accent-foreground: oklch(0.25 0.05 229.20);
+    --input: oklch(0.88 0.02 240.77);
+    --ring: oklch(0.71 0.15 239.15);
+
+    /* 
+       DIMENSIONAL SYSTEM 2.0 (Light Mode) 
+       Concept: No Borders, Pure Depth (Shadows & Lights)
+    */
+
+    /* Technique: Double Shadow (Definition + Elevation) */
+
+    /* Low Elevation (Cards/Elements) */
+    --shadow-floating-sm:
+        0 1px 2px 0 oklch(0 0 0 / 0.1),
+        /* Sharp Edge */
+        0 4px 8px -2px oklch(0 0 0 / 0.05);
+    /* Soft Ambient */
+
+    /* Medium Elevation (Search Bar/Sticky Header) */
+    --shadow-floating-md:
+        0 1px 3px 0 oklch(0 0 0 / 0.1),
+        0 8px 16px -4px oklch(0 0 0 / 0.06);
+
+    /* High Elevation (Modals/Sliders) */
+    --shadow-floating-lg:
+        0 1px 3px 0 oklch(0 0 0 / 0.1),
+        0 12px 24px -6px oklch(0 0 0 / 0.08);
+
+    /* TACTILE BUTTON SYSTEM - 2D DEPTH */
+    --btn-bevel: inset 0 1.5px 0 0 oklch(1 0 0 / 0.4);
+    --btn-thickness: 0 2px 0 0 oklch(0 0 0 / 0.1);
+    --btn-drop: 0 4px 8px -2px oklch(0 0 0 / 0.08);
+
+    --shadow-tactile: var(--btn-bevel), var(--btn-thickness), var(--btn-drop);
+
+    /* Recessed Inputs (Search Bar) - Pure Shadow, No Border */
+    --shadow-recessed:
+        inset 0 1.5px 0 0 oklch(1 0 0 / 0.4),
+        inset 0 2px 4px 0 oklch(0 0 0 / 0.05),
+        0 1px 0 0 oklch(1 0 0 / 0.8);
+    /* Bottom Lip Highlight */
+
+    /* Separator Shadow (Replaces Border Bottom) */
+    --shadow-separator: 0 1px 0 0 oklch(0 0 0 / 0.05);
+
+    /* Typography */
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Spacing */
+    --container-max: 1200px;
+    --container-padding: 1.5rem;
+
+    /* Border Radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
+  /* ============================================
+     Dark Mode Variables
+     ============================================ */
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 183 43% 65%;
-    --primary-foreground: 183 100% 10%;
-    --secondary: 183 100% 23%;
-    --secondary-foreground: 183 100% 97%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 15 63% 69%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 183 43% 65%;
+    --background: oklch(0.18 0.02 271.27);
+    --foreground: oklch(0.92 0.01 238.47);
+    --card: oklch(0.23 0.02 271.67);
+    --card-foreground: oklch(0.92 0.01 238.47);
+    --primary: oklch(0.71 0.15 239.15);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.30 0.03 270.91);
+    --secondary-foreground: oklch(0.92 0.01 238.47);
+    --muted: oklch(0.25 0.03 270.91);
+    --muted-foreground: oklch(0.65 0.03 269.46);
+    --accent: oklch(0.30 0.03 270.91);
+    --accent-foreground: oklch(0.92 0.01 238.47);
+    --input: oklch(0.92 0.01 238.47 / 0.15);
+    --ring: oklch(0.66 0.13 227.70);
+
+    /* Dimensional System (Dark Mode) */
+    --shadow-floating-sm:
+        0 1px 2px 0 oklch(0 0 0 / 0.5),
+        0 4px 8px -2px oklch(0 0 0 / 0.3);
+
+    --shadow-floating-md:
+        0 1px 3px 0 oklch(0 0 0 / 0.6),
+        0 8px 16px -4px oklch(0 0 0 / 0.4);
+
+    --shadow-floating-lg:
+        0 1px 3px 0 oklch(0 0 0 / 0.7),
+        0 12px 24px -6px oklch(0 0 0 / 0.5);
+
+    /* Tactile Buttons Dark - 2D DEPTH */
+    --btn-bevel: inset 0 1.5px 0 0 oklch(1 0 0 / 0.15);
+    --btn-thickness: 0 2px 0 0 oklch(0 0 0 / 0.4);
+    --btn-drop: 0 4px 8px -1px oklch(0 0 0 / 0.5);
+
+    --shadow-tactile: var(--btn-bevel), var(--btn-thickness), var(--btn-drop);
+
+    /* Recessed Inputs Dark - 2D DEPTH */
+    --shadow-recessed:
+        inset 0 1.5px 0 0 oklch(1 0 0 / 0.1),
+        inset 0 2px 4px 0 oklch(0 0 0 / 0.5),
+        0 1px 0 0 oklch(1 0 0 / 0.05);
+
+    --shadow-separator: 0 1px 0 0 oklch(1 0 0 / 0.1);
   }
 }
 
 @layer base {
   * {
-    border-color: hsl(var(--border));
+    border-color: var(--input);
   }
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
   }
 }
 

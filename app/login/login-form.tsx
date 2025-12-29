@@ -31,14 +31,14 @@ export default function LoginForm() {
 
   return (
     <Card 
-      className="glass-card w-full max-w-md border-0 shadow-2xl"
-      style={{ borderRadius: '24px' }}
+      className="w-full max-w-md rounded-3xl"
+      style={{ boxShadow: 'var(--shadow-floating-lg)' }}
     >
       <CardHeader className="text-center space-y-2 pb-8">
-        <CardTitle className="text-4xl font-black">
-          Welcome <span className="bg-gradient-to-r from-teal-700 to-orange-500 bg-clip-text text-transparent">back</span>
+        <CardTitle className="text-4xl font-bold">
+          Welcome <span className="text-primary">back</span>
         </CardTitle>
-        <CardDescription className="text-lg text-gray-600">
+        <CardDescription className="text-lg text-muted-foreground">
           Continue your journey with us
         </CardDescription>
       </CardHeader>
@@ -46,43 +46,44 @@ export default function LoginForm() {
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-semibold text-gray-700">Email</Label>
+            <Label htmlFor="email" className="text-sm font-semibold text-foreground">Email</Label>
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-600 w-5 h-5" />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-5 h-5" />
               <Input 
                 id="email"
                 name="email"
                 type="email"
                 placeholder="you@example.com"
                 required
-                className="h-12 pl-12 rounded-xl border-gray-200 focus:border-teal-500"
+                className="h-12 pl-12 rounded-xl"
               />
             </div>
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-sm font-semibold text-gray-700">Password</Label>
+            <Label htmlFor="password" className="text-sm font-semibold text-foreground">Password</Label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-600 w-5 h-5" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-5 h-5" />
               <Input 
                 id="password"
                 name="password"
                 type="password"
                 placeholder="Enter your password"
                 required
-                className="h-12 pl-12 rounded-xl border-gray-200 focus:border-teal-500"
+                className="h-12 pl-12 rounded-xl"
               />
             </div>
           </div>
           
           {error && (
-            <div className="text-sm text-red-600 text-center">{error}</div>
+            <div className="text-sm text-destructive text-center">{error}</div>
           )}
           
           <Button 
             type="submit" 
             disabled={loading}
-            className="w-full h-12 text-base font-bold rounded-xl bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 shadow-lg shadow-teal-500/30"
+            className="w-full h-12 text-base font-bold rounded-xl"
+            style={{boxShadow: 'var(--shadow-tactile)'}}
           >
             {loading ? (
               "Logging in..."
@@ -94,9 +95,9 @@ export default function LoginForm() {
             )}
           </Button>
           
-          <div className="text-center text-gray-600 mt-6">
+          <div className="text-center text-muted-foreground mt-6">
             Don't have an account?{' '}
-            <Link href="/signup" className="text-orange-500 font-semibold hover:text-orange-600">
+            <Link href="/signup" className="text-primary font-semibold hover:underline">
               Sign up
             </Link>
           </div>

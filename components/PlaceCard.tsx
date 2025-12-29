@@ -7,9 +7,9 @@ import { Card, CardContent } from '@/components/ui/card';
 export default function PlaceCard({ place }: { place: Place }) {
     return (
         <Link href={`/places/${place.$id}`}>
-            <Card className="overflow-hidden border border-gray-200 rounded-xl transition-all duration-300 h-full group hover:border-[#2D5F5D] hover:shadow-sm p-0">
+            <Card className="overflow-hidden rounded-xl transition-all duration-300 h-full group hover:translate-y-[-2px] p-0" style={{boxShadow: 'var(--shadow-floating-sm)'}}>
                 <CardContent className="p-0">
-                    <div className="relative h-56 overflow-hidden">
+                    <div className="relative h-56 overflow-hidden bg-muted">
                         <img
                             alt={place.name}
                             src={place.images?.[0] || "https://placehold.co/600x400?text=No+Image"}
@@ -17,23 +17,23 @@ export default function PlaceCard({ place }: { place: Place }) {
                         />
                         
                         {/* Rating Badge */}
-                        <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg flex items-center gap-1 shadow-sm">
-                            <Star className="w-4 h-4 fill-[#2D5F5D] text-[#2D5F5D]" />
-                            <span className="font-semibold text-gray-900 text-sm">{place.rating || 4.8}</span>
+                        <div className="absolute top-3 right-3 bg-card px-3 py-1.5 rounded-lg flex items-center gap-1.5" style={{boxShadow: 'var(--shadow-floating-md)'}}>
+                            <Star className="w-4 h-4 fill-primary text-primary" />
+                            <span className="font-semibold text-foreground text-sm">{place.rating || 4.8}</span>
                         </div>
                     </div>
                     
                     <div className="p-5">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-1 group-hover:text-[#2D5F5D] transition-colors">
+                        <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-1 group-hover:text-primary transition-colors">
                             {place.name}
                         </h3>
                         
-                        <div className="flex items-center text-gray-600 mb-3 text-sm">
-                            <MapPin className="mr-1.5 text-gray-400 w-4 h-4" />
+                        <div className="flex items-center text-muted-foreground mb-3 text-sm">
+                            <MapPin className="mr-1.5 text-primary w-4 h-4" />
                             {place.location}
                         </div>
 
-                        <p className="text-gray-600 line-clamp-2 text-sm leading-relaxed">
+                        <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
                             {place.description}
                         </p>
                     </div>

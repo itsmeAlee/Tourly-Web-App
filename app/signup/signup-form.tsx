@@ -31,14 +31,14 @@ export default function SignupForm() {
 
   return (
     <Card 
-      className="glass-card w-full max-w-md border-0 shadow-2xl"
-      style={{ borderRadius: '24px' }}
+      className="w-full max-w-md rounded-3xl"
+      style={{ boxShadow: 'var(--shadow-floating-lg)' }}
     >
       <CardHeader className="text-center space-y-2 pb-8">
-        <CardTitle className="text-4xl font-black">
-          Start your <span className="bg-gradient-to-r from-teal-700 to-orange-500 bg-clip-text text-transparent">journey</span>
+        <CardTitle className="text-4xl font-bold">
+          Start your <span className="text-primary">journey</span>
         </CardTitle>
-        <CardDescription className="text-lg text-gray-600">
+        <CardDescription className="text-lg text-muted-foreground">
           Create an account to explore amazing places
         </CardDescription>
       </CardHeader>
@@ -46,39 +46,39 @@ export default function SignupForm() {
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-sm font-semibold text-gray-700">Full Name</Label>
+            <Label htmlFor="name" className="text-sm font-semibold text-foreground">Full Name</Label>
             <div className="relative">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-600 w-5 h-5" />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-5 h-5" />
               <Input 
                 id="name"
                 name="name"
                 type="text"
                 placeholder="John Doe"
                 required
-                className="h-12 pl-12 rounded-xl border-gray-200 focus:border-teal-500"
+                className="h-12 pl-12 rounded-xl"
               />
             </div>
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-semibold text-gray-700">Email</Label>
+            <Label htmlFor="email" className="text-sm font-semibold text-foreground">Email</Label>
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-600 w-5 h-5" />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-5 h-5" />
               <Input 
                 id="email"
                 name="email"
                 type="email"
                 placeholder="you@example.com"
                 required
-                className="h-12 pl-12 rounded-xl border-gray-200 focus:border-teal-500"
+                className="h-12 pl-12 rounded-xl"
               />
             </div>
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-sm font-semibold text-gray-700">Password</Label>
+            <Label htmlFor="password" className="text-sm font-semibold text-foreground">Password</Label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-600 w-5 h-5" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-5 h-5" />
               <Input 
                 id="password"
                 name="password"
@@ -86,19 +86,20 @@ export default function SignupForm() {
                 placeholder="At least 8 characters"
                 required
                 minLength={8}
-                className="h-12 pl-12 rounded-xl border-gray-200 focus:border-teal-500"
+                className="h-12 pl-12 rounded-xl"
               />
             </div>
           </div>
           
           {error && (
-            <div className="text-sm text-red-600 text-center">{error}</div>
+            <div className="text-sm text-destructive text-center">{error}</div>
           )}
           
           <Button 
             type="submit" 
             disabled={loading}
-            className="w-full h-12 text-base font-bold rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg shadow-orange-500/30"
+            className="w-full h-12 text-base font-bold rounded-xl"
+            style={{boxShadow: 'var(--shadow-tactile)'}}
           >
             {loading ? (
               "Creating account..."
@@ -110,9 +111,9 @@ export default function SignupForm() {
             )}
           </Button>
           
-          <div className="text-center text-gray-600 mt-6">
+          <div className="text-center text-muted-foreground mt-6">
             Already have an account?{' '}
-            <Link href="/login" className="text-teal-700 font-semibold hover:text-teal-800">
+            <Link href="/login" className="text-primary font-semibold hover:underline">
               Login
             </Link>
           </div>

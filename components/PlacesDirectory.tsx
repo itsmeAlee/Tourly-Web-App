@@ -52,17 +52,17 @@ export default function PlacesDirectory({ places }: { places: Place[] }) {
   return (
     <>
       {/* Search and Filter Bar */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 mb-8 shadow-sm">
+      <div className="bg-card rounded-xl p-4 mb-8" style={{boxShadow: 'var(--shadow-floating-md)'}}>
         <div className="flex flex-col md:flex-row gap-4">
           {/* Search */}
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               type="text"
               placeholder="Search destinations by name, location, or description..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 h-11 border-gray-200 focus:border-[#2D5F5D] focus:ring-1 focus:ring-[#2D5F5D]"
+              className="pl-10 h-11"
             />
           </div>
 
@@ -82,7 +82,7 @@ export default function PlacesDirectory({ places }: { places: Place[] }) {
             </Select>
 
             <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-[160px] h-11 border-gray-200">
+              <SelectTrigger className="w-[160px] h-11">
                 <SelectValue placeholder="Sort By" />
               </SelectTrigger>
               <SelectContent>
@@ -95,7 +95,7 @@ export default function PlacesDirectory({ places }: { places: Place[] }) {
         </div>
 
         {/* Results Count */}
-        <div className="mt-3 text-sm text-gray-600">
+        <div className="mt-3 text-sm text-muted-foreground">
           Showing {filteredAndSortedPlaces.length} of {places.length} destinations
         </div>
       </div>
@@ -103,7 +103,7 @@ export default function PlacesDirectory({ places }: { places: Place[] }) {
       {/* Places Grid */}
       {filteredAndSortedPlaces.length === 0 ? (
         <div className="text-center py-16">
-          <p className="text-gray-500 text-lg">No destinations found matching your criteria.</p>
+          <p className="text-muted-foreground text-lg">No destinations found matching your criteria.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
