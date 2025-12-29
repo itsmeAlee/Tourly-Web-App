@@ -1,12 +1,29 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Compass, Home, Building2, MapPin } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Compass, Home, Building2, MapPin, LogOut, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/lib/auth/AuthContext';
+import { useState } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, loading, logout } = useAuth();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await logout();
+      router.push('/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
 
   const navItems = [
     { href: '/', label: 'Home', icon: Home },
@@ -52,23 +69,44 @@ export default function Navbar() {
 
         {/* Auth Buttons */}
         <div className="flex items-center gap-3">
-          <Link href="/login">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="font-medium"
-            >
-              Login
-            </Button>
-          </Link>
-          <Link href="/signup">
-            <Button
-              size="sm"
-              className="font-medium"
-            >
-              Sign up
-            </Button>
-          </Link>
+          {user ? (
+            <>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-accent/50 border">
+                <User className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">{user.name}</span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="font-medium"
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                {isLoggingOut ? 'Logging out...' : 'Logout'}
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link href="/login">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="font-medium"
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button
+                  size="sm"
+                  className="font-medium"
+                >
+                  Sign up
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

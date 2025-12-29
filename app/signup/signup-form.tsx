@@ -1,17 +1,20 @@
 'use client';
 
-import { signUp } from '@/lib/auth/actions';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Mail, Lock, User, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/lib/auth/AuthContext';
 
 export default function SignupForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const { register } = useAuth();
+  const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,12 +22,17 @@ export default function SignupForm() {
     setError('');
     
     const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    const name = formData.get('name') as string;
 
     try {
-      await signUp(formData);
-    } catch (err) {
+      await register(email, password, name);
+      router.push('/');
+    } catch (err: any) {
       console.error(err);
-      setError('Signup failed. Please try again.');
+      setError(err.message || 'Signup failed. Please try again.');
+    } finally {
       setLoading(false);
     }
   };

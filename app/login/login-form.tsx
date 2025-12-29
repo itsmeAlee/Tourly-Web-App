@@ -1,17 +1,20 @@
 'use client';
 
-import { signIn } from '@/lib/auth/actions';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Mail, Lock, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/lib/auth/AuthContext';
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const { login } = useAuth();
+  const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,12 +22,16 @@ export default function LoginForm() {
     setError('');
     
     const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
 
     try {
-      await signIn(formData);
-    } catch (err) {
+      await login(email, password);
+      router.push('/');
+    } catch (err: any) {
       console.error(err);
-      setError('Login failed. Please check your credentials.');
+      setError(err.message || 'Login failed. Please check your credentials.');
+    } finally {
       setLoading(false);
     }
   };

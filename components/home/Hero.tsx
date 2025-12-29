@@ -22,7 +22,7 @@ export default function Hero() {
           <br />
           <div className="invisible lg:visible mt-2 text-primary h-[100px] overflow-hidden">
             <ContainerTextFlip
-              words={["Mountaineering", "Hiking Trip", "Camping Trip"]}
+              words={["Mountaineering", "Hiking Adventure", "Camping Trip"]}
               className="bg-transparent border-none shadow-none max-h-[70px]"
               textClassName="bg-transparent text-primary"
             />

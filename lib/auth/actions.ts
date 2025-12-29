@@ -22,18 +22,23 @@ export async function signUp(formData: FormData) {
   const password = formData.get("password") as string;
   const name = formData.get("name") as string;
 
-  const { account } = await createAuthClient();
+  try {
+    const { account } = await createAuthClient();
 
-  await account.create(ID.unique(), email, password, name);
+    await account.create(ID.unique(), email, password, name);
 
-  const session = await account.createEmailPasswordSession(email, password);
+    const session = await account.createEmailPasswordSession(email, password);
 
-  (await cookies()).set("appwrite-session", session.secret, {
-    path: "/",
-    httpOnly: true,
-    sameSite: "strict",
-    secure: true,
-  });
+    (await cookies()).set("appwrite-session", session.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
+  } catch (error: any) {
+    console.error('SignUp Error:', error);
+    throw new Error(error.message || 'Failed to create account. Please try again.');
+  }
 
   redirect("/");
 }
@@ -42,16 +47,21 @@ export async function signIn(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const { account } = await createAuthClient();
+  try {
+    const { account } = await createAuthClient();
 
-  const session = await account.createEmailPasswordSession(email, password);
+    const session = await account.createEmailPasswordSession(email, password);
 
-  (await cookies()).set("appwrite-session", session.secret, {
-    path: "/",
-    httpOnly: true,
-    sameSite: "strict",
-    secure: true,
-  });
+    (await cookies()).set("appwrite-session", session.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
+  } catch (error: any) {
+    console.error('SignIn Error:', error);
+    throw new Error(error.message || 'Invalid email or password. Please try again.');
+  }
 
   redirect("/");
 }
