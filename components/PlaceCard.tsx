@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 export default function PlaceCard({ place }: { place: Place }) {
     return (
         <Link href={`/places/${place.$id}`}>
-            <Card className="overflow-hidden rounded-xl transition-all duration-300 h-full group hover:translate-y-[-2px] p-0" style={{boxShadow: 'var(--shadow-floating-sm)'}}>
+            <Card className="overflow-hidden rounded-lg transition-colors h-full group p-0">
                 <CardContent className="p-0">
                     <div className="relative h-56 overflow-hidden bg-muted">
                         <img
@@ -17,7 +17,7 @@ export default function PlaceCard({ place }: { place: Place }) {
                         />
                         
                         {/* Rating Badge */}
-                        <div className="absolute top-3 right-3 bg-card px-3 py-1.5 rounded-lg flex items-center gap-1.5" style={{boxShadow: 'var(--shadow-floating-md)'}}>
+                        <div className="absolute top-3 right-3 bg-card px-3 py-1.5 rounded-lg flex items-center gap-1.5 border">
                             <Star className="w-4 h-4 fill-primary text-primary" />
                             <span className="font-semibold text-foreground text-sm">{place.rating || 4.8}</span>
                         </div>

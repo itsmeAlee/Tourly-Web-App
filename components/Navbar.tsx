@@ -19,8 +19,8 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed top-0 w-full z-50 bg-card"
-      style={{ height: '64px', boxShadow: 'var(--shadow-floating-md)' }}
+      className="fixed top-0 w-full z-[9999] bg-background/95 backdrop-blur-sm border-b"
+      style={{ height: '64px' }}
     >
       <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
         {/* Logo */}
@@ -65,7 +65,6 @@ export default function Navbar() {
             <Button
               size="sm"
               className="font-medium"
-              style={{ boxShadow: 'var(--shadow-tactile)' }}
             >
               Sign up
             </Button>

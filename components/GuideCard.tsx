@@ -29,7 +29,7 @@ export default function GuideCard({ guide }: { guide: Guide }) {
   const whatsappNumber = guide.contact?.replace(/[^0-9+]/g, '');
 
   return (
-    <Card className="rounded-xl transition-all duration-300 group hover:translate-y-[-2px] p-0" style={{boxShadow: 'var(--shadow-floating-sm)'}}>
+    <Card className="rounded-lg transition-colors group p-0">
       <CardContent className="p-6">
         <Link href={`/guides/${guide.$id}`} className="block">
           <div className="flex gap-4 mb-4">
@@ -82,7 +82,6 @@ export default function GuideCard({ guide }: { guide: Guide }) {
           >
             <Button 
               className="w-full h-10 text-sm font-medium bg-[#25D366] hover:bg-[#20BA5A] text-white"
-              style={{boxShadow: 'var(--shadow-tactile)'}}
             >
               <WhatsAppIcon className="w-4 h-4 mr-2" />
               Contact on WhatsApp

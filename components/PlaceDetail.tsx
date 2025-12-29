@@ -10,7 +10,7 @@ export default function PlaceDetail({ place }: { place: Place }) {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
       {/* Image Carousel */}
-      <div className="relative mb-8 rounded-2xl overflow-hidden" style={{boxShadow: 'var(--shadow-floating-lg)'}}>
+      <div className="relative mb-8 rounded-lg overflow-hidden border">
         <img 
           src={images[currentImage]} 
           alt={place.name} 

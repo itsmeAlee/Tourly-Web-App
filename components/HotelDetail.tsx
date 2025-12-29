@@ -18,7 +18,7 @@ export default function HotelDetail({ hotel }: { hotel: Hotel }) {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
       {/* Image Carousel */}
-      <div className="relative mb-8 rounded-2xl overflow-hidden" style={{boxShadow: 'var(--shadow-floating-lg)'}}>
+      <div className="relative mb-8 rounded-lg overflow-hidden border">
         <img 
           src={images[currentImage]} 
           alt={hotel.name} 
@@ -58,7 +58,7 @@ export default function HotelDetail({ hotel }: { hotel: Hotel }) {
             </div>
           </div>
         </div>
-        <div className="text-right bg-card px-6 py-4 rounded-2xl" style={{boxShadow: 'var(--shadow-floating-md)'}}>
+        <div className="text-right bg-card px-6 py-4 rounded-lg border">
           <div className="text-3xl font-bold text-primary">
             PKR {hotel.pricePerNight}
           </div>
@@ -98,7 +98,6 @@ export default function HotelDetail({ hotel }: { hotel: Hotel }) {
       {/* Book Button */}
       <Button 
         className="w-full h-14 text-lg font-bold rounded-xl"
-        style={{boxShadow: 'var(--shadow-tactile)'}}
       >
         <Calendar className="w-5 h-5 mr-2" />
         Book Now

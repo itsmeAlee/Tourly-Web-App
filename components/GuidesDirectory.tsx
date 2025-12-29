@@ -34,7 +34,7 @@ export default function GuidesDirectory({ guides }: { guides: Guide[] }) {
   return (
     <>
       {/* Filter Bar */}
-      <div className="bg-card rounded-xl p-4 mb-8" style={{boxShadow: 'var(--shadow-floating-md)'}}>
+      <div className="bg-card rounded-lg border p-4 mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="text-sm text-muted-foreground">
             Showing {filteredGuides.length} of {guides.length} guides

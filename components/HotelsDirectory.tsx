@@ -57,7 +57,7 @@ export default function HotelsDirectory({ hotels }: { hotels: Hotel[] }) {
   return (
     <>
       {/* Search and Filter Bar */}
-      <div className="bg-card rounded-xl p-4 mb-8" style={{boxShadow: 'var(--shadow-floating-md)'}}>
+      <div className="bg-card rounded-lg border p-4 mb-8">
         <div className="flex flex-col md:flex-row gap-4">
           {/* Search */}
           <div className="flex-1 relative">

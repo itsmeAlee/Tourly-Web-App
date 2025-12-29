@@ -23,7 +23,7 @@ export default function Hero() {
                 </p>
                 
                 {/* Search Widget */}
-                <div className="bg-card p-4 rounded-2xl flex flex-col md:flex-row gap-3 items-end max-w-4xl mx-auto" style={{boxShadow: 'var(--shadow-floating-lg)'}}>
+                <div className="bg-card p-4 rounded-lg border flex flex-col md:flex-row gap-3 items-end max-w-4xl mx-auto">
                     <div className="flex-1 w-full text-left">
                         <label className="block text-xs font-medium text-muted-foreground mb-2 ml-1">Destination</label>
                         <div className="relative">
@@ -63,7 +63,6 @@ export default function Hero() {
                     <Button 
                         size="lg"
                         className="h-11 px-6 text-sm font-medium rounded-lg w-full md:w-auto"
-                        style={{boxShadow: 'var(--shadow-tactile)'}}
                     >
                         <Search className="w-4 h-4 mr-2" />
                         Search

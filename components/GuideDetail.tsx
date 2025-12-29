@@ -8,7 +8,7 @@ export default function GuideDetail({ guide }: { guide: Guide }) {
     <div className="max-w-4xl mx-auto py-8 px-4">
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         {/* Image */}
-        <div className="rounded-2xl overflow-hidden" style={{boxShadow: 'var(--shadow-floating-sm)'}}>
+        <div className="rounded-lg overflow-hidden border">
           <img 
             src={guide.imageUrl || 'https://placehold.co/600x600?text=Guide'} 
             alt={guide.name} 
@@ -67,7 +67,6 @@ export default function GuideDetail({ guide }: { guide: Guide }) {
 
           <Button 
             className="w-full h-12 text-base font-medium rounded-lg"
-            style={{boxShadow: 'var(--shadow-tactile)'}}
           >
             <Phone className="w-5 h-5 mr-2" />
             Contact Guide

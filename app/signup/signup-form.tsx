@@ -31,8 +31,7 @@ export default function SignupForm() {
 
   return (
     <Card 
-      className="w-full max-w-md rounded-3xl"
-      style={{ boxShadow: 'var(--shadow-floating-lg)' }}
+      className="w-full max-w-md rounded-lg border"
     >
       <CardHeader className="text-center space-y-2 pb-8">
         <CardTitle className="text-4xl font-bold">
@@ -99,7 +98,6 @@ export default function SignupForm() {
             type="submit" 
             disabled={loading}
             className="w-full h-12 text-base font-bold rounded-xl"
-            style={{boxShadow: 'var(--shadow-tactile)'}}
           >
             {loading ? (
               "Creating account..."

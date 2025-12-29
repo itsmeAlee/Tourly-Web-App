@@ -44,7 +44,7 @@ export default function Categories() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {categories.map((category, index) => (
                 <Link key={index} href={category.href} className="group">
-                    <div className="bg-card rounded-xl p-6 hover:translate-y-[-2px] transition-all duration-300" style={{boxShadow: 'var(--shadow-floating-sm)'}}>
+                    <div className="bg-card rounded-lg border p-6 hover:border-primary transition-colors">
                         <div className="w-12 h-12 rounded-lg bg-accent group-hover:bg-primary flex items-center justify-center mb-4 transition-colors duration-300">
                             <category.icon className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300" />
                         </div>
