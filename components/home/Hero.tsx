@@ -23,7 +23,17 @@ export default function Hero() {
                 </p>
                 
                 {/* Search Widget */}
-                <div className="bg-card p-4 rounded-lg border flex flex-col md:flex-row gap-3 items-end max-w-4xl mx-auto">
+                <div className="relative w-full">
+                    {/* Gradient Background - Full Width */}
+                    <div 
+                        className="absolute left-0 right-0 h-full blur-3xl opacity-30"
+                        style={{
+                            background: 'radial-gradient(ellipse 800px 300px at center, oklch(0.71 0.15 239.15), transparent)'
+                        }}
+                    ></div>
+                    
+                    <div className="relative max-w-4xl mx-auto">
+                        <div className="bg-card p-4 rounded-lg border flex flex-col md:flex-row gap-3 items-end">
                     <div className="flex-1 w-full text-left">
                         <label className="block text-xs font-medium text-muted-foreground mb-2 ml-1">Destination</label>
                         <div className="relative">
@@ -67,6 +77,8 @@ export default function Hero() {
                         <Search className="w-4 h-4 mr-2" />
                         Search
                     </Button>
+                    </div>
+                    </div>
                 </div>
                 
                 {/* Quick Links */}
