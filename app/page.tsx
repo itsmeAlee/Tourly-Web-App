@@ -1,8 +1,11 @@
+import Hero from '@/components/home/Hero';
+import Categories from '@/components/home/Categories';
 
-const Page = () => {
+export default function Home() {
   return (
-    <div>page</div>
-  )
+    <div className="min-h-screen">
+      <Hero />
+      <Categories />
+    </div>
+  );
 }
-
-export default Page;

@@ -1,0 +1,9 @@
+import SignupForm from './signup-form';
+
+export default function SignupPage() {
+  return (
+    <div className="flex justify-center items-center min-h-screen gradient-bg">
+      <SignupForm />
+    </div>
+  );
+}
