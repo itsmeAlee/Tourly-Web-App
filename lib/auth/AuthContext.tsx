@@ -12,6 +12,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
   refreshUser: () => Promise<void>;
+  loginWithGoogle: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -59,8 +60,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  const loginWithGoogle = () => {
+    account.createOAuth2Session(
+      'google',
+      `${window.location.origin}/`,
+      `${window.location.origin}/login`
+    );
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, register, refreshUser }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, register, refreshUser, loginWithGoogle }}>
       {children}
     </AuthContext.Provider>
   );
