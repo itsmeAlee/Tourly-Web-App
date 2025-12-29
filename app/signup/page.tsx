@@ -24,7 +24,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen gradient-bg">
+    <div className="flex justify-center items-center min-h-screen bg-white">
       <SignupForm />
     </div>
   );
