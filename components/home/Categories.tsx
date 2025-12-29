@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { Building2, MapPin, Compass, Calendar, ArrowRight } from 'lucide-react';
+import { Building2, MapPin, Users, Calendar, ArrowRight } from 'lucide-react';
 
 export default function Categories() {
     const categories = [
@@ -17,10 +17,10 @@ export default function Categories() {
             description: 'Discover stunning locations',
         },
         {
-            href: '#',
-            icon: Compass,
-            title: 'Tours',
-            description: 'Expert-guided adventures',
+            href: '/guides',
+            icon: Users,
+            title: 'Tour Guides',
+            description: 'Connect with local experts',
         },
         {
             href: '#',

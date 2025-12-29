@@ -12,6 +12,7 @@ export default function Navbar() {
     { href: '/', label: 'Home', icon: Home },
     { href: '/hotels', label: 'Hotels', icon: Building2 },
     { href: '/places', label: 'Places', icon: MapPin },
+    { href: '/guides', label: 'Guides', icon: Compass },
   ];
 
   const isActive = (href: string) => pathname === href;
