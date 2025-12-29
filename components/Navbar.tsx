@@ -1,8 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Compass, Home, Building2, MapPin, LogOut, User } from 'lucide-react';
+import { Compass, Home, Building2, MapPin, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/lib/auth/AuthContext';
 import { useState } from 'react';
@@ -71,10 +72,14 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           {user ? (
             <>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-accent/50 border">
-                <User className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground">{user.name}</span>
-              </div>
+              <Link href="/profile" className="transition-opacity hover:opacity-80">
+                <Avatar className="h-9 w-9">
+                  <AvatarImage src={user.prefs?.photoURL} alt={user.name} />
+                  <AvatarFallback className="bg-primary text-primary-foreground text-sm font-semibold">
+                    {user.name?.charAt(0).toUpperCase() || 'U'}
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
               <Button
                 variant="ghost"
                 size="sm"

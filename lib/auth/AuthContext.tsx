@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { Account, Client, Models, ID, OAuthProvider } from 'appwrite';
+import { uploadProfilePicture } from '@/lib/storage';
 
 type User = Models.User<Models.Preferences> | null;
 
@@ -13,6 +14,7 @@ interface AuthContextType {
   register: (email: string, password: string, name: string) => Promise<void>;
   refreshUser: () => Promise<void>;
   loginWithGoogle: () => void;
+  uploadUserProfilePicture: (file: File) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -40,8 +42,49 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  // Save Google profile picture to user prefs
+  const saveGoogleProfilePicture = async (currentUser: Models.User<Models.Preferences>) => {
+    try {
+      // Check if user has a Google identity
+      const googleIdentity = currentUser.identities?.find(
+        (identity) => identity.provider === 'google'
+      );
+
+      // Only proceed if user signed in with Google and doesn't have a photoURL saved
+      if (googleIdentity && !currentUser.prefs?.photoURL) {
+        // Get the avatar URL from Google via Appwrite
+        const avatarUrl = `${process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT}/avatars/providers/google/${googleIdentity.providerUid}?width=200&height=200`;
+        
+        // Update user preferences with the photo URL
+        const updatedUser = await account.updatePrefs({
+          ...currentUser.prefs,
+          photoURL: avatarUrl,
+        });
+        
+        // Update local state with new prefs
+        setUser(updatedUser);
+      }
+    } catch (error) {
+      console.error('Failed to save Google profile picture:', error);
+    }
+  };
+
   useEffect(() => {
-    refreshUser();
+    const initUser = async () => {
+      try {
+        const currentUser = await account.get();
+        setUser(currentUser);
+        
+        // Check and save Google profile picture if needed
+        await saveGoogleProfilePicture(currentUser);
+      } catch (error) {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initUser();
   }, []);
 
   const login = async (email: string, password: string) => {
@@ -68,8 +111,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const uploadUserProfilePicture = async (file: File) => {
+    if (!user) {
+      throw new Error('No user logged in');
+    }
+
+    try {
+      // Upload the file to Appwrite Storage
+      const fileUrl = await uploadProfilePicture(file, user.$id);
+
+      // Update user preferences with the new photo URL
+      const updatedUser = await account.updatePrefs({
+        ...user.prefs,
+        photoURL: fileUrl,
+      });
+
+      // Update local state
+      setUser(updatedUser);
+    } catch (error) {
+      console.error('Failed to upload profile picture:', error);
+      throw error;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, register, refreshUser, loginWithGoogle }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, register, refreshUser, loginWithGoogle, uploadUserProfilePicture }}>
       {children}
     </AuthContext.Provider>
   );
