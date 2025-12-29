@@ -1,5 +1,5 @@
 import { getHotels } from "@/lib/db/hotels";
-import HotelCard from "@/components/HotelCard";
+import HotelsDirectory from "@/components/HotelsDirectory";
 
 export const revalidate = 60; // ISR
 
@@ -7,27 +7,19 @@ export default async function HotelsPage() {
   const hotels = await getHotels();
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, #f8fafb 0%, #ffffff 100%)' }}>
-      <div className="max-w-7xl mx-auto py-20 px-4 page-transition">
+    <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4">
         {/* Header Section */}
-        <div className="text-center mb-16 mt-12">
-          <h1 className="text-6xl md:text-7xl font-black mb-4" style={{ letterSpacing: '-2px' }}>
-            Stay at the best
-            <span className="block mt-2 bg-gradient-to-r from-teal-700 to-orange-500 bg-clip-text text-transparent">
-              hotels
-            </span>
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+            Hotels
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover handpicked accommodations with breathtaking mountain views and exceptional hospitality
+          <p className="text-lg text-gray-600">
+            Discover handpicked accommodations with breathtaking mountain views
           </p>
         </div>
 
-        {/* Hotels Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {hotels.map((hotel) => (
-            <HotelCard key={hotel.$id} hotel={hotel} />
-          ))}
-        </div>
+        <HotelsDirectory hotels={hotels} />
       </div>
     </div>
   );
