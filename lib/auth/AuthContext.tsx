@@ -4,7 +4,24 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { Account, Client, Models, ID, OAuthProvider } from 'appwrite';
 import { uploadProfilePicture } from '@/lib/storage';
 
-type User = Models.User<Models.Preferences> | null;
+// Extend the User type to include custom preferences
+interface CustomPreferences extends Models.Preferences {
+  photoURL?: string;
+}
+
+interface Identity {
+  $id: string;
+  provider: string;
+  providerUid: string;
+  providerEmail?: string;
+}
+
+interface CustomUser extends Omit<Models.User<Models.Preferences>, 'prefs'> {
+  prefs: CustomPreferences;
+  identities?: Identity[];
+}
+
+type User = CustomUser | null;
 
 interface AuthContextType {
   user: User;
@@ -34,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const refreshUser = async () => {
     try {
       const currentUser = await account.get();
-      setUser(currentUser);
+      setUser(currentUser as CustomUser);
     } catch (error) {
       setUser(null);
     } finally {
@@ -43,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   // Save Google profile picture to user prefs
-  const saveGoogleProfilePicture = async (currentUser: Models.User<Models.Preferences>) => {
+  const saveGoogleProfilePicture = async (currentUser: CustomUser) => {
     try {
       // Check if user has a Google identity
       const googleIdentity = currentUser.identities?.find(
@@ -73,10 +90,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const initUser = async () => {
       try {
         const currentUser = await account.get();
-        setUser(currentUser);
+        setUser(currentUser as CustomUser);
         
         // Check and save Google profile picture if needed
-        await saveGoogleProfilePicture(currentUser);
+        await saveGoogleProfilePicture(currentUser as CustomUser);
       } catch (error) {
         setUser(null);
       } finally {

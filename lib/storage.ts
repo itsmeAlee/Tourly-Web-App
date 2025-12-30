@@ -1,4 +1,4 @@
-import { Client, Storage, ID } from 'appwrite';
+import { Client, Storage } from 'appwrite';
 
 // Create client for storage operations
 const client = new Client()
@@ -22,7 +22,7 @@ export async function uploadProfilePicture(file: File, userId: string): Promise<
     // We'll use userId as the file ID to ensure uniqueness and easy deletion
     try {
       await storage.deleteFile(PROFILE_PICTURES_BUCKET_ID, userId);
-    } catch (error) {
+    } catch {
       // File doesn't exist, which is fine
     }
 
