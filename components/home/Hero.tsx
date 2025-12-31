@@ -3,6 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, MapPin, Calendar, Users } from "lucide-react";
 import { ContainerTextFlip } from "../ui/container-text-flip";
+import { DatePicker } from "antd";
+import type { Dayjs } from 'dayjs';
+
+const { RangePicker } = DatePicker;
 
 export default function Hero() {
   return (
@@ -68,15 +72,13 @@ export default function Hero() {
 
               <div className="flex-1 w-full text-left">
                 <label className="block text-xs font-medium text-muted-foreground mb-2 ml-1">
-                  Check-in
+                  Dates
                 </label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                  <Input
-                    type="date"
-                    className="h-11 pl-10 text-sm rounded-lg"
-                  />
-                </div>
+                <RangePicker
+                  placeholder={['Start Date', 'End Date']}
+                  className="h-11 w-full"
+                  format="MMM DD, YYYY"
+                />
               </div>
 
               <div className="flex-1 w-full text-left">

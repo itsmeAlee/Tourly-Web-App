@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { AuthProvider } from "@/lib/auth/AuthContext";
+import AntdRegistry from "@/lib/antd-registry";
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -24,10 +25,12 @@ export default function RootLayout({
       <body
         className={`${fontSans.variable} font-sans antialiased`}
       >
-        <AuthProvider>
-          <Navbar />
-          <main>{children}</main>
-        </AuthProvider>
+        <AntdRegistry>
+          <AuthProvider>
+            <Navbar />
+            <main>{children}</main>
+          </AuthProvider>
+        </AntdRegistry>
       </body>
     </html>
   );
