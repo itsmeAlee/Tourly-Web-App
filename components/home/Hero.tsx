@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Search, MapPin, Calendar, Users } from "lucide-react";
 import { ContainerTextFlip } from "../ui/container-text-flip";
 import { DatePicker } from "antd";
-import type { Dayjs } from 'dayjs';
 
 const { RangePicker } = DatePicker;
 
