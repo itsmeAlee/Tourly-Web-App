@@ -71,13 +71,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (googleIdentity && !currentUser.prefs?.photoURL) {
         // Get the avatar URL from Google via Appwrite
         const avatarUrl = `${process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT}/avatars/providers/google/${googleIdentity.providerUid}?width=200&height=200`;
-        
+
         // Update user preferences with the photo URL
         const updatedUser = await account.updatePrefs({
           ...currentUser.prefs,
           photoURL: avatarUrl,
         });
-        
+
         // Update local state with new prefs
         setUser(updatedUser);
       }
@@ -91,7 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const currentUser = await account.get();
         setUser(currentUser as CustomUser);
-        
+
         // Check and save Google profile picture if needed
         await saveGoogleProfilePicture(currentUser as CustomUser);
       } catch (error) {
