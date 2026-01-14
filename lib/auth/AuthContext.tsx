@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode, useMemo } from 'react';
 import { Account, Client, Models, ID, OAuthProvider } from 'appwrite';
 import { uploadProfilePicture } from '@/lib/storage';
 
@@ -36,14 +36,14 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Create Appwrite client instance
-const client = new Client()
-  .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-  .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
-
-const account = new Account(client);
-
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const account = useMemo(() => {
+    const client = new Client()
+      .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
+      .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID || 'placeholder');
+    return new Account(client);
+  }, []);
+
   const [user, setUser] = useState<User>(null);
   const [loading, setLoading] = useState(true);
 

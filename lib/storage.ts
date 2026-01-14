@@ -1,11 +1,27 @@
 import { Client, Storage } from 'appwrite';
 
-// Create client for storage operations
-const client = new Client()
-  .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-  .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
+// Lazy initialization to prevent build crashes
+let client: Client | null = null;
+let storage: Storage | null = null;
 
-const storage = new Storage(client);
+function getStorage() {
+  if (!client) {
+    const endpoint = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT;
+    const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
+
+    // Fallback to prevent crash if env vars are missing during build
+    // This allows the module to load without erroring
+    client = new Client()
+      .setEndpoint(endpoint || 'https://cloud.appwrite.io/v1')
+      .setProject(projectId || 'placeholder');
+  }
+
+  if (!storage) {
+    storage = new Storage(client!);
+  }
+
+  return storage as Storage;
+}
 
 // Storage bucket ID for profile pictures
 export const PROFILE_PICTURES_BUCKET_ID = process.env.NEXT_PUBLIC_PROFILE_PICTURES_BUCKET_ID || 'profile-pictures';
@@ -20,6 +36,7 @@ export async function uploadProfilePicture(file: File, userId: string): Promise<
   try {
     // Delete old profile picture if it exists
     // We'll use userId as the file ID to ensure uniqueness and easy deletion
+    const storage = getStorage();
     try {
       await storage.deleteFile(PROFILE_PICTURES_BUCKET_ID, userId);
     } catch {
@@ -49,6 +66,7 @@ export async function uploadProfilePicture(file: File, userId: string): Promise<
  */
 export async function deleteProfilePicture(userId: string): Promise<void> {
   try {
+    const storage = getStorage();
     await storage.deleteFile(PROFILE_PICTURES_BUCKET_ID, userId);
   } catch (error) {
     console.error('Failed to delete profile picture:', error);
