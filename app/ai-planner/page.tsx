@@ -210,11 +210,11 @@ export default function AIPlannerPage() {
                             className="flex flex-col items-center w-full"
                         >
                             {/* The List */}
-                            <div className="w-full flex flex-col">
+                            <div className="w-full flex flex-col gap-0">
                                 {response!.timeline?.map((step, index) => {
                                     const hasNext = step.travel_to_next?.has_next && step.travel_to_next?.distance;
                                     return (
-                                        <div key={index} className="flex flex-col items-center w-full">
+                                        <div key={index} className="flex flex-col items-center w-full mb-2">
                                             {/* 1. The Card */}
                                             <PlaceCard
                                                 stepOrder={step.step_order}

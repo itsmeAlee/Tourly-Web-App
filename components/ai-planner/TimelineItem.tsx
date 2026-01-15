@@ -30,11 +30,6 @@ export default function PlaceCard({
             transition={{ duration: 0.4, delay: stepOrder * 0.1 }}
             className="relative z-10 w-full max-w-lg mx-auto"
         >
-            {/* Blue Dot Indicator - Top Left */}
-            <div className="absolute -top-2 -left-2 z-20">
-                <div className="w-4 h-4 rounded-full bg-primary shadow-md border-2 border-background" />
-            </div>
-
             {/* The White Card */}
             <div className="bg-card rounded-xl shadow-sm border border-border/50 overflow-hidden
                       hover:shadow-md transition-shadow duration-300 relative bg-background">
